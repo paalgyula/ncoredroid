@@ -23,6 +23,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.gwsystems.ncoredroid.R;
+import com.gwsystems.ncoredroid.adapters.NavigationMenuAdapter;
+
+import java.util.ArrayList;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -91,15 +94,16 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        mDrawerListView = (ListView) inflater.inflate(
-                R.layout.fragment_navigation_drawer, container, false);
+        View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        mDrawerListView = (ListView)view.findViewById( R.id.navdraweListView );
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
+
+        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
@@ -107,9 +111,17 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section1),
                         getString(R.string.title_section2),
                         getString(R.string.title_section3),
-                }));
+                });
+
+        ArrayList<Object> objects = new ArrayList<Object>();
+        objects.add("Trallala");
+        objects.add("trallala2");
+
+        mDrawerListView.setAdapter( new NavigationMenuAdapter(this.getActivity(), objects) );
+
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-        return mDrawerListView;
+
+        return view;
     }
 
     public boolean isDrawerOpen() {
