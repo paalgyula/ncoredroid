@@ -1,0 +1,8 @@
+**/*.class
+.gradle
+/local.properties
+.idea
+.idea/**
+/.idea/workspace.xml
+**/*.iml
+.DS_Store

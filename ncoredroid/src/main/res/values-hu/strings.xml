@@ -1,0 +1,20 @@
+<resources>
+
+    <string name="action_settings">Beállítások</string>
+    <string name="app_name">nCore Android Client</string>
+    <string name="login_bg_desc">nCore Bejelentkezési háttér</string>
+    <string name="action_torrents">Torrentek</string>
+    <string name="login_btn_text">Bejelentkezés</string>
+    <string name="icon_image_description">iconImage</string>
+    <string name="torrentListItemLabel">Torrent Label</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="torrent_list_downloading">Lista lekérése folyamatban...</string>
+    <string name="title_activity_torrent_search">Torrent Kereső</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+
+</resources>
