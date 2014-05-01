@@ -3,4 +3,160 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/main_bg"></LinearLayout>
+    android:background="@drawable/main_bg"
+    android:paddingLeft="10dp"
+    android:paddingTop="5dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="5dp">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/fobox_fej">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="22dp"
+            android:text="Torrent adatai"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal"
+            style="@style/TorrentDetails.Title"
+            android:gravity="center_vertical" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        style="@style/TorrentDetails.Infobox"
+        android:layout_marginTop="1dp"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/torrentName"
+            android:layout_gravity="center_horizontal"
+            style="@style/TorrentDetails.Heading"
+            android:gravity="center_horizontal" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/torrentIcon"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/ico_misc" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/download_icon" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="300dp"
+            android:layout_height="fill_parent"
+            android:padding="10dp"
+            android:layout_gravity="center_horizontal"
+            style="@style/TorrentDetails.Stats"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                style="@style/TorrentDetails.Row">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/torrent_seeds"
+                    style="@style/TorrentDetails.Label"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/torrentSeeders"
+                    style="@style/TorrentDetails.Value"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+
+            <!-- Leechek -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                style="@style/TorrentDetails.Row">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/torrent_leeches"
+                    style="@style/TorrentDetails.Label"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/torrentLeechers"
+                    style="@style/TorrentDetails.Value"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <!-- Letoltesek -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                style="@style/TorrentDetails.Row">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/torrent_downloads"
+                    style="@style/TorrentDetails.Label"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/torrentDownloads"
+                    style="@style/TorrentDetails.Value"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <!-- Feltöltve -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                style="@style/TorrentDetails.Row">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/torrent_uploaded"
+                    style="@style/TorrentDetails.Label"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/torrentUploaded"
+                    style="@style/TorrentDetails.Value"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

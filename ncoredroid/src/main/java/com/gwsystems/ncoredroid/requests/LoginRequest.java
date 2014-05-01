@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Created by paalgyula on 2014.04.27..
  */
-public class LoginRequest extends AsyncTask<Void, Void, Boolean> {
+public class LoginRequest extends AsyncTask<String, Void, Boolean> {
     private LoginActivity loginActivity;
 
     public LoginRequest(LoginActivity loginActivity) {
@@ -30,7 +30,7 @@ public class LoginRequest extends AsyncTask<Void, Void, Boolean> {
     }
 
     @Override
-    protected Boolean doInBackground(Void... voids) {
+    protected Boolean doInBackground(String... args) {
         HttpClient httpClient = LoginActivity.getHttpClient();
         HttpPost httppost = new HttpPost("https://ncore.cc/login.php");
 
@@ -46,9 +46,13 @@ public class LoginRequest extends AsyncTask<Void, Void, Boolean> {
              pass:susegoofyY50027462
              */
 
+            //String username = args[0];
+            //String password = args[1];
+
             nameValuePairs.add(new BasicNameValuePair("submitted", "1"));
-            nameValuePairs.add(new BasicNameValuePair("nev", "goofyx"));
             nameValuePairs.add(new BasicNameValuePair("submit", "Belépés!"));
+
+            nameValuePairs.add(new BasicNameValuePair("nev", "goofyx"));
             nameValuePairs.add(new BasicNameValuePair("pass", "susegoofyY50027462"));
 
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));

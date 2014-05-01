@@ -90,12 +90,10 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
 
         progressDialog = getProgressDialog();
         progressDialog.setCancelable(false);
-        progressDialog.setMessage("Torrent lista betöltése...");
+        progressDialog.setMessage(getString(R.string.torrent_list_downloading));
         progressDialog.show();
 
         new TorrentListRequest(this).execute(searchString);
-        //this.showProgressDialog(getString(R.string.torrent_list_downloading));
-
         // Inflate the layout for this fragment
         return v;
     }

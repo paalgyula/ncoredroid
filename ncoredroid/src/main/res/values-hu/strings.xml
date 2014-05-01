@@ -24,4 +24,9 @@
     <string name="default_int_value">0</string>
     <string name="login_username">Felhasználónév</string>
     <string name="login_password">Jelszó</string>
+    <string name="torrent_details">Torrent adatai</string>
+    <string name="torrent_seeds">Seedek:</string>
+    <string name="torrent_downloads">Letöltések száma:</string>
+    <string name="torrent_leeches">Leecherek:</string>
+    <string name="torrent_uploaded">Feltöltve:</string>
 </resources>

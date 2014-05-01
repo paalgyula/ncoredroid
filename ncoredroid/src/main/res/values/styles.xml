@@ -56,4 +56,52 @@
         <item name="android:singleLine">true</item>
     </style>
 
+    <style name="TorrentDetails">
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowColor">#333333</item>
+        <item name="android:shadowRadius">2</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="TorrentDetails.Title">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">@drawable/title_bg_shape</item>
+        <item name="android:textSize">10dp</item>
+        <item name="android:padding">3dp</item>
+        <item name="android:layout_height">22dp</item>
+    </style>
+
+    <style name="TorrentDetails.Infobox">
+        <item name="android:background">@drawable/torrent_item_bg_odd</item>
+    </style>
+
+    <style name="TorrentDetails.Heading">
+        <item name="android:textSize">16dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TorrentDetails.Stats">
+        <item name="android:background">@drawable/torrent_item_bg_even</item>
+    </style>
+
+    <style name="TorrentDetails.Label">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">right</item>
+    </style>
+
+    <style name="TorrentDetails.Value">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">left</item>
+        <item name="android:paddingLeft">6dp</item>
+    </style>
+
+    <style name="TorrentDetails.Row">
+        <item name="android:background">@drawable/bottom_dashed_border</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
 </resources>
