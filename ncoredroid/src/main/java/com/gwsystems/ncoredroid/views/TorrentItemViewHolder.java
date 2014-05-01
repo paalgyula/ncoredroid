@@ -82,4 +82,7 @@ public class TorrentItemViewHolder {
         icon.setBackgroundResource(R.drawable.torrent_item_bg_even);
     }
 
+    public TorrentObject getTorrent() {
+        return torrentObject;
+    }
 }

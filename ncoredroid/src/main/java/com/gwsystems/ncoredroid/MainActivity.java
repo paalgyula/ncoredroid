@@ -10,19 +10,16 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.gwsystems.ncoredroid.fragments.NavigationDrawerFragment;
-import com.gwsystems.ncoredroid.fragments.SearchFragment;
+import com.gwsystems.ncoredroid.views.TorrentItemViewHolder;
+
+import static com.gwsystems.ncoredroid.fragments.SearchFragment.SearchFragmentInteractionListener;
 
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, SearchFragment.SearchFragmentInteractionListener {
+        implements
+        NavigationDrawerFragment.NavigationDrawerCallbacks,
+        SearchFragmentInteractionListener {
 
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
     private NavigationDrawerFragment mNavigationDrawerFragment;
-
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
     private CharSequence mTitle;
 
     @Override
@@ -30,22 +27,16 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_layout);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
         // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        /*FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();*/
+
     }
 
     public void restoreActionBar() {
@@ -83,6 +74,6 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void itemSelected(View view) {
-        Log.wtf( "MainActivity", view.getTag().toString() );
+        Log.wtf("MainActivity", ((TorrentItemViewHolder) view.getTag()).getTorrent().toString());
     }
 }

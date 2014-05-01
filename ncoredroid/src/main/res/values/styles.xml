@@ -6,6 +6,10 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="AppTheme.NoActionbar" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <style name="torrent_seed_leech_down">
         <item name="android:layout_weight">.33</item>
         <item name="android:textSize">10dp</item>
