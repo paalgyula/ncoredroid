@@ -22,4 +22,5 @@
     <string name="not_logged_in">You are not logged in</string>
     <string name="logging_in">Logging in...</string>
     <string name="user">Profile</string>
+    <string name="default_int_value">0</string>
 </resources>

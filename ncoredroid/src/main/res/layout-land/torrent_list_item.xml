@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="fill_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/torrentIcon"
@@ -17,14 +19,15 @@
     <LinearLayout
         android:id="@+id/textLayout"
         android:orientation="vertical"
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
         android:layout_height="32dp"
         android:background="@drawable/torrent_item_bg_odd"
-        android:layout_marginLeft="1px">
+        android:layout_marginLeft="1px"
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/torrentLabel"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/torrentListItemLabel"
             android:textColor="#e7e7e7"
@@ -42,27 +45,23 @@
             android:layout_height="fill_parent"
             android:paddingLeft="3dp">
 
-            <TextView
-                style="@style/torrent_seed_leech_down"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView"
-                android:text="@string/torrent_seeders" />
-
-            <TextView
-                style="@style/torrent_seed_leech_down"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Small Text"
-                android:id="@+id/textView2" />
-
-            <TextView
-                style="@style/torrent_seed_leech_down"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Small Text"
-                android:id="@+id/textView3" />
         </LinearLayout>
+
     </LinearLayout>
+
+    <TextView
+        android:background="@drawable/torrent_item_bg_even"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seedView"
+        style="@style/torrent_seed_leech_down_box"
+        android:text="@string/default_int_value" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/default_int_value"
+        android:id="@+id/leechView"
+        style="@style/torrent_seed_leech_down_box" />
 
 </LinearLayout>
