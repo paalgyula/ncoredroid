@@ -23,4 +23,6 @@
     <string name="logging_in">Logging in...</string>
     <string name="user">Profile</string>
     <string name="default_int_value">0</string>
+    <string name="login_username">Felhasználónév</string>
+    <string name="login_password">Jelszó</string>
 </resources>

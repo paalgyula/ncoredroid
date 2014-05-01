@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.gwsystems.ncoredroid.R;
@@ -28,11 +29,11 @@ import java.util.ArrayList;
 public class SearchFragment extends Fragment implements TorrentListRequest.TorrentListHolder {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
+    private static final String SEARCH_STRING = "searchString";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private String searchString;
     private String mParam2;
 
     private SearchFragmentInteractionListener mListener;
@@ -50,7 +51,7 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
     public static SearchFragment newInstance(String param1, String param2) {
         SearchFragment fragment = new SearchFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putString(SEARCH_STRING, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -63,7 +64,7 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            searchString = getArguments().getString(SEARCH_STRING);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -74,9 +75,18 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
         View v =inflater.inflate(R.layout.fragment_search, container, false);
         this.torrentListAdapter = new TorrentListAdapter(getActivity(), new ArrayList<TorrentObject>());
         ListView torrentListView = (ListView) v.findViewById(R.id.torrentListView);
+        torrentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                // TODO kepvaltas!
+                if (mListener != null)
+                    mListener.itemSelected(view);
+            }
+        });
+
         torrentListView.setAdapter(this.torrentListAdapter);
 
-        new TorrentListRequest(this).execute();
+        new TorrentListRequest(this).execute(searchString);
         //this.showProgressDialog(getString(R.string.torrent_list_downloading));
 
         // Inflate the layout for this fragment
@@ -100,17 +110,8 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface SearchFragmentInteractionListener {
+        void itemSelected(View view);
     }
 
     @Override

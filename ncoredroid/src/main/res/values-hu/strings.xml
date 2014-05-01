@@ -4,7 +4,7 @@
     <string name="app_name">nCore Android Client</string>
     <string name="login_bg_desc">nCore Bejelentkezési háttér</string>
     <string name="action_torrents">Torrentek</string>
-    <string name="login_btn_text">Bejelentkezés</string>
+    <string name="login_btn_text">Belépés!</string>
     <string name="icon_image_description">iconImage</string>
     <string name="torrentListItemLabel">Torrent Label</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -22,4 +22,6 @@
     <string name="logging_in">Logging in...</string>
     <string name="user">Profile</string>
     <string name="default_int_value">0</string>
+    <string name="login_username">Felhasználónév</string>
+    <string name="login_password">Jelszó</string>
 </resources>

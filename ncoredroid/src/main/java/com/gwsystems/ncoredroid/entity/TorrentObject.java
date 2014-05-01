@@ -1,9 +1,11 @@
 package com.gwsystems.ncoredroid.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by paalgyula on 2014.04.27..
  */
-public class TorrentObject {
+public class TorrentObject implements Serializable {
     private String name;
     private String size;
 
@@ -13,6 +15,8 @@ public class TorrentObject {
     private String leech;
     private String seed;
     private String category;
+
+    private TorrentUploader torrentUploader;
 
     public String getName() {
         return name;
@@ -81,5 +85,13 @@ public class TorrentObject {
 
     public String getCategory() {
         return category;
+    }
+
+    public TorrentUploader getTorrentUploader() {
+        return torrentUploader;
+    }
+
+    public void setTorrentUploader(TorrentUploader torrentUploader) {
+        this.torrentUploader = torrentUploader;
     }
 }

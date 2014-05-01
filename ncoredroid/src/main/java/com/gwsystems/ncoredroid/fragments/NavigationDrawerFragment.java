@@ -105,12 +105,12 @@ public class NavigationDrawerFragment extends Fragment {
             }
         });
 
-        TextView searchText = (TextView) view.findViewById(R.id.menu_search_field);
+        final TextView searchText = (TextView) view.findViewById(R.id.menu_search_field);
         searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    performSearch();
+                    performSearch(searchText.getText().toString());
                     return true;
                 }
                 return false;
@@ -118,12 +118,12 @@ public class NavigationDrawerFragment extends Fragment {
         });
 
         mDrawerListView.setAdapter(new NavigationMenuAdapter(this.getActivity()));
-        mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+        this.performSearch(searchText.getText().toString());
 
         return view;
     }
 
-    private void performSearch() {
+    private void performSearch(String text) {
         Log.wtf("asd", "PerformSearch elerve!");
 
         if (mDrawerLayout != null) {
@@ -132,7 +132,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, SearchFragment.newInstance("",""))
+                .replace(R.id.container, SearchFragment.newInstance(text, ""))
                 .commit();
     }
 

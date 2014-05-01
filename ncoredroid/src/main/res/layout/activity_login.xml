@@ -14,16 +14,81 @@
         android:background="@android:color/black"
         android:contentDescription="@string/login_bg_desc" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="@string/login_btn_text"
-        android:id="@+id/login_btn"
-        android:layout_gravity="right|top" />
+        android:id="@+id/scrollView"
+        android:layout_gravity="center_horizontal">
 
-    <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/torrentListView"
-        android:layout_gravity="center" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="130dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="32dp"
+                    android:id="@+id/editText"
+                    style="@style/login_input_text"
+                    android:layout_gravity="top"
+                    android:hint="@string/login_username"
+                    android:layout_weight="1" />
+
+                <Button
+                    style="@style/login_input_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="@string/login_btn_text"
+                    android:id="@+id/login_btn"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="32dp"
+                    android:ems="10"
+                    android:id="@+id/editText2"
+                    style="@style/login_input_text"
+                    android:hint="@string/login_password"
+                    android:inputType="textPassword" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:id="@+id/imageView2"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription=""
+                android:background="@drawable/green_ruler"
+                android:layout_marginTop="25dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Szerzői jogi probléma esetén kérjük a webmaster@ncore.cc hivatalos címünkre küldjön levelet, s kérésére a jogsértő anyagot módunkban áll eltávolítani, valamint felvenni azt tiltólistánkra."
+                android:id="@+id/textView"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/white"
+                android:textSize="10dp"
+                android:gravity="center" />
+        </LinearLayout>
+    </ScrollView>
+
 </FrameLayout>

@@ -6,6 +6,7 @@ import android.util.Log;
 import com.gwsystems.ncoredroid.LoginActivity;
 import com.gwsystems.ncoredroid.adapters.TorrentListAdapter;
 import com.gwsystems.ncoredroid.entity.TorrentObject;
+import com.gwsystems.ncoredroid.entity.TorrentUploader;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -27,7 +28,7 @@ import java.util.List;
 /**
  * Created by paalgyula on 2014.04.27..
  */
-public class TorrentListRequest extends AsyncTask<Void, Void, List<TorrentObject>> {
+public class TorrentListRequest extends AsyncTask<String, Void, List<TorrentObject>> {
 
     private TorrentListHolder torrentListHolder;
 
@@ -36,7 +37,7 @@ public class TorrentListRequest extends AsyncTask<Void, Void, List<TorrentObject
     }
 
     @Override
-    protected List<TorrentObject> doInBackground(Void... voids) {
+    protected List<TorrentObject> doInBackground(String... args) {
         HttpClient httpClient = LoginActivity.getHttpClient();
         HttpPost httpPost = new HttpPost("https://ncore.cc/torrents.php");
 
@@ -51,6 +52,9 @@ public class TorrentListRequest extends AsyncTask<Void, Void, List<TorrentObject
          submit:Ok
          tags:
          */
+
+        if (args.length > 0)
+            nameValuePairs.add(new BasicNameValuePair("mire", args[0]));
 
         nameValuePairs.add(new BasicNameValuePair("miben", "name"));
         nameValuePairs.add(new BasicNameValuePair("tipus", "all_own"));
@@ -102,11 +106,23 @@ public class TorrentListRequest extends AsyncTask<Void, Void, List<TorrentObject
                 if (sizeElement != null)
                     torrentObject.setLeech(l2Element.text());
 
-                Element categoryElement = this.getElement(torrentElement, ".box_alap_img a img");
+                Element categoryElement = this.getElement(torrentElement, ".box_alap_img a");
                 if (categoryElement != null)
-                    torrentObject.setCategory(categoryElement.attr("alt"));
+                    torrentObject.setCategory(categoryElement.attr("href").replace("/torrents.php?tipus=", ""));
 
-                torrentObjects.push(torrentObject);
+                // Torrent feltolto
+                Element uploaderElement = this.getElement(torrentElement, ".box_feltolto2 a");
+                if ( uploaderElement != null ) {
+                    Element spanElement = this.getElement(uploaderElement, "span");
+                    torrentObject.setTorrentUploader(new TorrentUploader(
+                            spanElement.text(),
+                            uploaderElement.attr("href").replace("profile.php?id=", ""),
+                            spanElement.attr("class")
+                    ));
+
+                }
+
+                torrentObjects.addLast(torrentObject);
             }
 
             Log.i("TorrentListRequest", "Parsed objects...");
@@ -122,7 +138,7 @@ public class TorrentListRequest extends AsyncTask<Void, Void, List<TorrentObject
         Log.wtf("TorrentList Size", "TorrentList Size: " + torrentObjects.size());
         for (Iterator<TorrentObject> itr = torrentObjects.iterator(); itr.hasNext(); ) {
             TorrentObject torrentObject = itr.next();
-            torrentListHolder.getTorrentListAdapter().add( torrentObject );
+            torrentListHolder.getTorrentListAdapter().add(torrentObject);
         }
 
         // TODO: implementalni a visszajelzest
@@ -137,6 +153,7 @@ public class TorrentListRequest extends AsyncTask<Void, Void, List<TorrentObject
             Element linkElement = iterator.next();
             return linkElement;
         } else {
+            Log.e("ElementFinder", "Element not found: " + selector );
             System.err.println(torrentElement);
             return null;
         }
