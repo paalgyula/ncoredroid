@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.gwsystems.ncoredroid.CustomProgressDialog;
 import com.gwsystems.ncoredroid.R;
 import com.gwsystems.ncoredroid.adapters.TorrentListAdapter;
 import com.gwsystems.ncoredroid.entity.TorrentObject;
@@ -38,6 +39,7 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
 
     private SearchFragmentInteractionListener mListener;
     private TorrentListAdapter torrentListAdapter;
+    private CustomProgressDialog progressDialog;
 
     /**
      * Use this factory method to create a new instance of
@@ -72,7 +74,7 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.fragment_search, container, false);
+        View v =inflater.inflate(R.layout.fragment_torrent_search, container, false);
         this.torrentListAdapter = new TorrentListAdapter(getActivity(), new ArrayList<TorrentObject>());
         ListView torrentListView = (ListView) v.findViewById(R.id.torrentListView);
         torrentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -85,6 +87,11 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
         });
 
         torrentListView.setAdapter(this.torrentListAdapter);
+
+        progressDialog = getProgressDialog();
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Torrent lista betöltése...");
+        progressDialog.show();
 
         new TorrentListRequest(this).execute(searchString);
         //this.showProgressDialog(getString(R.string.torrent_list_downloading));
@@ -117,5 +124,12 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
     @Override
     public TorrentListAdapter getTorrentListAdapter() {
         return this.torrentListAdapter;
+    }
+
+    @Override
+    public CustomProgressDialog getProgressDialog() {
+        if ( this.progressDialog == null )
+            this.progressDialog = new CustomProgressDialog(this.getActivity());
+        return this.progressDialog;
     }
 }

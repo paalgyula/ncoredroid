@@ -3,6 +3,7 @@ package com.gwsystems.ncoredroid.requests;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.gwsystems.ncoredroid.CustomProgressDialog;
 import com.gwsystems.ncoredroid.LoginActivity;
 import com.gwsystems.ncoredroid.adapters.TorrentListAdapter;
 import com.gwsystems.ncoredroid.entity.TorrentObject;
@@ -14,6 +15,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -71,7 +73,7 @@ public class TorrentListRequest extends AsyncTask<String, Void, List<TorrentObje
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse httpResponse = httpClient.execute(httpPost);
 
-            String responseString = EntityUtils.toString(httpResponse.getEntity());
+            String responseString = EntityUtils.toString(httpResponse.getEntity(), HTTP.UTF_8);
 
             Log.i("TorrentListRequest", "Executed HTTP Post");
 
@@ -141,8 +143,7 @@ public class TorrentListRequest extends AsyncTask<String, Void, List<TorrentObje
             torrentListHolder.getTorrentListAdapter().add(torrentObject);
         }
 
-        // TODO: implementalni a visszajelzest
-        //loginActivity.hideProgressDialog();
+        torrentListHolder.getProgressDialog().hide();
     }
 
     private Element getElement(Element torrentElement, String selector) {
@@ -161,5 +162,6 @@ public class TorrentListRequest extends AsyncTask<String, Void, List<TorrentObje
 
     public interface TorrentListHolder {
         TorrentListAdapter getTorrentListAdapter();
+        CustomProgressDialog getProgressDialog();
     }
 }

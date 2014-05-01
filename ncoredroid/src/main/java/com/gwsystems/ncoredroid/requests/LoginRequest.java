@@ -72,4 +72,12 @@ public class LoginRequest extends AsyncTask<Void, Void, Boolean> {
 
         return true;
     }
+
+    @Override
+    protected void onPostExecute(Boolean aBoolean) {
+        super.onPostExecute(aBoolean);
+
+        loginActivity.hideProgressDialog();
+        loginActivity.showFragment();
+    }
 }

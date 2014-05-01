@@ -55,12 +55,13 @@ public class LoginCheckRequest extends AsyncTask<Void, Void, Boolean> {
     }
 
     protected void onPostExecute(Boolean loggedIn) {
-        ProgressDialog dialog = loginActivity.getProgressDialog();
-        dialog.setMessage(loginActivity.getString(R.string.logging_in));
-        dialog.setCancelable(false);
-        dialog.show();
         if (!loggedIn) {
             try {
+                ProgressDialog dialog = loginActivity.getProgressDialog();
+                dialog.setMessage(loginActivity.getString(R.string.logging_in));
+                dialog.setCancelable(false);
+                dialog.show();
+
                 if (new LoginRequest(loginActivity).execute().get()) {
                     loginActivity.hideProgressDialog();
                     loginActivity.showFragment();
