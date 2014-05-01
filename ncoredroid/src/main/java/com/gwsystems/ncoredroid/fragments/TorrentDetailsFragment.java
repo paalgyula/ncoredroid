@@ -15,6 +15,9 @@ import com.gwsystems.ncoredroid.R;
 import com.gwsystems.ncoredroid.entity.TorrentObject;
 import com.gwsystems.ncoredroid.utils.CategoryIcons;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
@@ -25,8 +28,12 @@ public class TorrentDetailsFragment extends Fragment {
 
     private TorrentObject torrent;
 
-    TextView torrentName;
-    ImageView torrentIcon;
+    private TextView torrentName;
+    private ImageView torrentIcon;
+    private TextView uploaded;
+    private TextView seeders;
+    private TextView downloads;
+    private TextView leechers;
 
     public TorrentDetailsFragment() {
         // Required empty public constructor
@@ -46,6 +53,11 @@ public class TorrentDetailsFragment extends Fragment {
         this.torrentName = (TextView) view.findViewById(R.id.torrentName);
         this.torrentIcon = (ImageView) view.findViewById(R.id.torrentIcon);
 
+        this.uploaded = (TextView)view.findViewById(R.id.torrentUploaded);
+        this.downloads = (TextView)view.findViewById(R.id.torrentDownloads);
+        this.leechers = (TextView)view.findViewById(R.id.torrentLeechers);
+        this.seeders = (TextView)view.findViewById(R.id.torrentSeeders);
+
         setupFields();
         setupActions();
 
@@ -55,6 +67,10 @@ public class TorrentDetailsFragment extends Fragment {
     private void setupFields() {
         this.torrentName.setText( torrent.getName() );
         this.torrentIcon.setImageResource(CategoryIcons.getIcon(torrent.getCategory()));
+        this.uploaded.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date()));
+        this.seeders.setText(torrent.getSeed());
+        this.leechers.setText(torrent.getLeech());
+        this.downloads.setText(torrent.getDownloaded());
     }
 
     private void setupActions() {
