@@ -9,7 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.gwsystems.ncoredroid.entity.TorrentObject;
 import com.gwsystems.ncoredroid.fragments.NavigationDrawerFragment;
+import com.gwsystems.ncoredroid.fragments.TorrentDetailsFragment;
 import com.gwsystems.ncoredroid.views.TorrentItemViewHolder;
 
 import static com.gwsystems.ncoredroid.fragments.SearchFragment.SearchFragmentInteractionListener;
@@ -74,6 +76,15 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void itemSelected(View view) {
-        Log.wtf("MainActivity", ((TorrentItemViewHolder) view.getTag()).getTorrent().toString());
+        TorrentObject torrentObject = ((TorrentItemViewHolder) view.getTag()).getTorrent();
+        Log.wtf("MainActivity", torrentObject.toString());
+        String name = "torrentDetails";
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.container, TorrentDetailsFragment.newInstance(torrentObject), name)
+                .addToBackStack(name)
+                .commit();
     }
 }

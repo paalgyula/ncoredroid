@@ -9,12 +9,13 @@ import com.gwsystems.ncoredroid.R;
 import com.gwsystems.ncoredroid.entity.TorrentObject;
 import com.gwsystems.ncoredroid.views.TorrentItemViewHolder;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by paalgyula on 2014.04.27..
  */
-public class TorrentListAdapter extends ArrayAdapter<TorrentObject> {
+public class TorrentListAdapter extends ArrayAdapter<TorrentObject> implements Serializable {
     private final Activity context;
     private final List<TorrentObject> objects;
 
