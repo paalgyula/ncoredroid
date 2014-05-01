@@ -3,7 +3,7 @@ package com.gwsystems.ncoredroid.requests;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.gwsystems.ncoredroid.MainActivity;
+import com.gwsystems.ncoredroid.LoginActivity;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -23,9 +23,15 @@ import java.util.List;
  * Created by paalgyula on 2014.04.27..
  */
 public class LoginRequest extends AsyncTask<Void, Void, Boolean> {
+    private LoginActivity loginActivity;
+
+    public LoginRequest(LoginActivity loginActivity) {
+        this.loginActivity = loginActivity;
+    }
+
     @Override
     protected Boolean doInBackground(Void... voids) {
-        HttpClient httpClient = MainActivity.getHttpClient();
+        HttpClient httpClient = LoginActivity.getHttpClient();
         HttpPost httppost = new HttpPost("https://ncore.cc/login.php");
 
         try {

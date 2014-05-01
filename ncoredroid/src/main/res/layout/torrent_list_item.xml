@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/torrentIcon"
+        android:layout_width="51dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_launcher"
+        android:contentDescription="@string/icon_image_description"
+        android:background="@drawable/torrent_item_bg_odd"
+        android:padding="1px" />
+
+    <LinearLayout
+        android:id="@+id/textLayout"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/torrent_item_bg_odd"
+        android:layout_marginLeft="1px">
+
+        <TextView
+            android:id="@+id/torrentLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/torrentListItemLabel"
+            android:textColor="#e7e7e7"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_gravity="center_vertical"
+            android:textSize="10dp"
+            android:paddingLeft="3dp"
+            android:paddingTop="1dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:paddingLeft="3dp">
+
+            <TextView
+                style="@style/torrent_seed_leech_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView"
+                android:text="@string/torrent_seeders" />
+
+            <TextView
+                style="@style/torrent_seed_leech_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Small Text"
+                android:id="@+id/textView2" />
+
+            <TextView
+                style="@style/torrent_seed_leech_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Small Text"
+                android:id="@+id/textView3" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -12,8 +12,9 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/menu_search_field"
         android:layout_gravity="center_horizontal"
+        android:imeOptions="actionSearch"
         android:inputType="text"
         android:hint="@string/nav_search_text_hint"
         android:layout_marginBottom="10dp" />
@@ -23,6 +24,7 @@
         android:layout_height="wrap_content"
         android:text="Továbbiak"
         android:id="@+id/textView"
+        android:imeOptions="actionSearch"
         android:textStyle="bold"
         android:layout_marginBottom="10dp" />
 

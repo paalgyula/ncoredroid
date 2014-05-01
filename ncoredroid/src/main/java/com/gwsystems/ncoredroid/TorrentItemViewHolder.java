@@ -6,7 +6,7 @@ import android.widget.TextView;
 /**
  * Created by paalgyula on 2014.04.27..
  */
-public class TorrentItemViewHolder {
+public class TorrentItemViewHolder  {
     private ImageView icon;
     private TextView text;
 

@@ -1,10 +1,10 @@
 package com.gwsystems.ncoredroid.requests;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.gwsystems.ncoredroid.MainActivity;
+import com.gwsystems.ncoredroid.LoginActivity;
+import com.gwsystems.ncoredroid.adapters.TorrentListAdapter;
 import com.gwsystems.ncoredroid.entity.TorrentObject;
 
 import org.apache.http.HttpResponse;
@@ -28,15 +28,16 @@ import java.util.List;
  * Created by paalgyula on 2014.04.27..
  */
 public class TorrentListRequest extends AsyncTask<Void, Void, List<TorrentObject>> {
-    private Activity parentActivity;
 
-    public TorrentListRequest(Activity parentActivity) {
-        this.parentActivity = parentActivity;
+    private TorrentListHolder torrentListHolder;
+
+    public TorrentListRequest(TorrentListHolder torrentListHolder) {
+        this.torrentListHolder = torrentListHolder;
     }
 
     @Override
     protected List<TorrentObject> doInBackground(Void... voids) {
-        HttpClient httpClient = MainActivity.getHttpClient();
+        HttpClient httpClient = LoginActivity.getHttpClient();
         HttpPost httpPost = new HttpPost("https://ncore.cc/torrents.php");
 
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -119,14 +120,13 @@ public class TorrentListRequest extends AsyncTask<Void, Void, List<TorrentObject
     @Override
     protected void onPostExecute(List<TorrentObject> torrentObjects) {
         Log.wtf("TorrentList Size", "TorrentList Size: " + torrentObjects.size());
-        MainActivity mainActivity = (MainActivity) this.parentActivity;
-
         for (Iterator<TorrentObject> itr = torrentObjects.iterator(); itr.hasNext(); ) {
             TorrentObject torrentObject = itr.next();
-            mainActivity.getTorrentListAdapter().add( torrentObject );
+            torrentListHolder.getTorrentListAdapter().add( torrentObject );
         }
 
-        mainActivity.hideProgressDialog();
+        // TODO: implementalni a visszajelzest
+        //loginActivity.hideProgressDialog();
     }
 
     private Element getElement(Element torrentElement, String selector) {
@@ -140,5 +140,9 @@ public class TorrentListRequest extends AsyncTask<Void, Void, List<TorrentObject
             System.err.println(torrentElement);
             return null;
         }
+    }
+
+    public interface TorrentListHolder {
+        TorrentListAdapter getTorrentListAdapter();
     }
 }

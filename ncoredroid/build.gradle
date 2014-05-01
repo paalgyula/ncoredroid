@@ -13,7 +13,10 @@ android {
 
     signingConfigs {
         laptopdev {
-
+            storeFile file("/home/paalgyula/keystore_droid.jks")
+            storePassword "susegoofyY5"
+            keyAlias "ncoredroid"
+            keyPassword "susegoofyY5"
         }
     }
 
@@ -34,6 +37,9 @@ dependencies {
     // You must install or update the Google Repository through the SDK manager to use this dependency.
     // The Google Repository (separate from the corresponding library) can be found in the Extras category.
     // compile 'com.google.android.gms:play-services:4.0.30'
+    // You must install or update the Google Repository through the SDK manager to use this dependency.
+    // The Google Repository (separate from the corresponding library) can be found in the Extras category.
+    // 
     // You must install or update the Google Repository through the SDK manager to use this dependency.
     // The Google Repository (separate from the corresponding library) can be found in the Extras category.
     // 

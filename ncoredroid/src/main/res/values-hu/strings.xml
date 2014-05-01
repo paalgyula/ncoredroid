@@ -17,5 +17,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
     <string name="nav_search_text_hint">Keresés...</string>
-
+    <string name="torrent_seeders">Seederek:</string>
+    <string name="not_logged_in">Nem vagy bejelentkezve</string>
+    <string name="logging_in">Logging in...</string>
+    <string name="user">Profile</string>
 </resources>
