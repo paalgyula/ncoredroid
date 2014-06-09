@@ -118,7 +118,9 @@ public class NavigationDrawerFragment extends Fragment {
         });
 
         mDrawerListView.setAdapter(new NavigationMenuAdapter(this.getActivity()));
-        this.performSearch(searchText.getText().toString());
+
+        if (savedInstanceState == null)
+            this.performSearch(searchText.getText().toString());
 
         return view;
     }

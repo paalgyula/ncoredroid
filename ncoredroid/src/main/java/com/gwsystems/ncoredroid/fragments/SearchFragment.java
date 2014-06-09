@@ -3,6 +3,7 @@ package com.gwsystems.ncoredroid.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,9 @@ import com.gwsystems.ncoredroid.adapters.TorrentListAdapter;
 import com.gwsystems.ncoredroid.entity.TorrentObject;
 import com.gwsystems.ncoredroid.requests.TorrentListRequest;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -32,6 +35,7 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String SEARCH_STRING = "searchString";
     private static final String ARG_PARAM2 = "param2";
+    private static final String BUNDLED_TORRENT_LIST = "torrentList";
 
     // TODO: Rename and change types of parameters
     private String searchString;
@@ -40,6 +44,10 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
     private SearchFragmentInteractionListener mListener;
     private TorrentListAdapter torrentListAdapter;
     private CustomProgressDialog progressDialog;
+
+    public SearchFragment() {
+        // Required empty public constructor
+    }
 
     /**
      * Use this factory method to create a new instance of
@@ -58,9 +66,6 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
         fragment.setArguments(args);
         return fragment;
     }
-    public SearchFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,9 +77,23 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.i("SearchFragment", "Torrent lista mentese. Torrentek szama: " + torrentListAdapter.getTorrents().size());
+        outState.putSerializable(BUNDLED_TORRENT_LIST, (Serializable) torrentListAdapter.getTorrents());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.fragment_torrent_search, container, false);
+        List<TorrentObject> savedList = null;
+        try {
+            savedList = (List<TorrentObject>) savedInstanceState.get(BUNDLED_TORRENT_LIST);
+        } catch (Exception e) {
+            Log.i("SearchFragment", "Null a mentett torrentlista... Le fogjuk kerdezni!", e);
+        }
+
+        View v = inflater.inflate(R.layout.fragment_torrent_search, container, false);
         this.torrentListAdapter = new TorrentListAdapter(getActivity(), new ArrayList<TorrentObject>());
         ListView torrentListView = (ListView) v.findViewById(R.id.torrentListView);
         torrentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -88,12 +107,16 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
 
         torrentListView.setAdapter(this.torrentListAdapter);
 
-        progressDialog = getProgressDialog();
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage(getString(R.string.torrent_list_downloading));
-        progressDialog.show();
+        if (savedList != null) {
+            torrentListAdapter.addAll((List<TorrentObject>) savedInstanceState.getSerializable(BUNDLED_TORRENT_LIST));
+        } else {
+            progressDialog = getProgressDialog();
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage(getString(R.string.torrent_list_downloading));
+            progressDialog.show();
 
-        new TorrentListRequest(this).execute(searchString);
+            new TorrentListRequest(this).execute(searchString);
+        }
         // Inflate the layout for this fragment
         return v;
     }
@@ -115,10 +138,6 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
         mListener = null;
     }
 
-    public interface SearchFragmentInteractionListener {
-        void itemSelected(View view);
-    }
-
     @Override
     public TorrentListAdapter getTorrentListAdapter() {
         return this.torrentListAdapter;
@@ -126,8 +145,17 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
 
     @Override
     public CustomProgressDialog getProgressDialog() {
-        if ( this.progressDialog == null )
+        if (this.progressDialog == null)
             this.progressDialog = new CustomProgressDialog(this.getActivity());
         return this.progressDialog;
+    }
+
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+    }
+
+    public interface SearchFragmentInteractionListener {
+        void itemSelected(View view);
     }
 }

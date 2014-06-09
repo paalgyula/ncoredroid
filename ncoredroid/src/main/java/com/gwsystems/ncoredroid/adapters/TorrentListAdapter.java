@@ -31,13 +31,22 @@ public class TorrentListAdapter extends ArrayAdapter<TorrentObject> implements S
         // reuse views
         if (rowView == null) {
             TorrentItemViewHolder holder = new TorrentItemViewHolder(context, objects.get(position));
-            if ( position % 2 != 0 )
+            if (position % 2 != 0)
                 holder.setEven();
 
             rowView = holder.getView();
-            rowView.setTag( holder );
+            rowView.setTag(holder);
         }
 
         return rowView;
+    }
+
+    /**
+     * Returns torrent list
+     *
+     * @return
+     */
+    public List<TorrentObject> getTorrents() {
+        return this.objects;
     }
 }
