@@ -1,93 +1,93 @@
 <FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@android:color/black">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@drawable/loginbg"
-        android:padding="0dp"
         android:layout_gravity="center_horizontal|top"
         android:background="@android:color/black"
-        android:contentDescription="@string/login_bg_desc" />
+        android:contentDescription="@string/login_bg_desc"
+        android:padding="0dp"
+        android:src="@drawable/loginbg" />
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollView"
         android:layout_gravity="center_horizontal">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:paddingBottom="10dp"
             android:paddingTop="130dp">
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/username"
+                    style="@style/login_input_text"
                     android:layout_width="fill_parent"
                     android:layout_height="32dp"
-                    android:id="@+id/editText"
-                    style="@style/login_input_text"
                     android:layout_gravity="top"
-                    android:hint="@string/login_username"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:hint="@string/login_username" />
 
                 <Button
+                    android:id="@+id/login_btn"
                     style="@style/login_input_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
-                    android:text="@string/login_btn_text"
-                    android:id="@+id/login_btn"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/login_btn_text" />
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/password"
+                    style="@style/login_input_text"
                     android:layout_width="fill_parent"
                     android:layout_height="32dp"
                     android:ems="10"
-                    android:id="@+id/editText2"
-                    style="@style/login_input_text"
                     android:hint="@string/login_password"
                     android:inputType="textPassword" />
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/imageView2"
                 android:layout_width="fill_parent"
                 android:layout_height="1px"
-                android:id="@+id/imageView2"
                 android:layout_gravity="center_horizontal"
-                android:contentDescription=""
+                android:layout_marginTop="25dp"
                 android:background="@drawable/green_ruler"
-                android:layout_marginTop="25dp" />
+                android:contentDescription="" />
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Szerzői jogi probléma esetén kérjük a webmaster@ncore.cc hivatalos címünkre küldjön levelet, s kérésére a jogsértő anyagot módunkban áll eltávolítani, valamint felvenni azt tiltólistánkra."
-                android:id="@+id/textView"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="Szerzői jogi probléma esetén kérjük a webmaster@ncore.cc hivatalos címünkre küldjön levelet, s kérésére a jogsértő anyagot módunkban áll eltávolítani, valamint felvenni azt tiltólistánkra."
                 android:textColor="@android:color/white"
-                android:textSize="10dp"
-                android:gravity="center" />
+                android:textSize="10dp" />
         </LinearLayout>
     </ScrollView>
 

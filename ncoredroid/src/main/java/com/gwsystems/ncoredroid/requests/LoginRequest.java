@@ -1,9 +1,11 @@
 package com.gwsystems.ncoredroid.requests;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.gwsystems.ncoredroid.LoginActivity;
+import com.gwsystems.ncoredroid.R;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -15,6 +17,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +25,8 @@ import java.util.List;
 /**
  * Created by paalgyula on 2014.04.27..
  */
-public class LoginRequest extends AsyncTask<String, Void, Boolean> {
+public class LoginRequest extends AsyncTask<CharSequence, Void, Boolean> {
+    public static final String DAT_FILENAME = "ncoreconfig.dat";
     private LoginActivity loginActivity;
 
     public LoginRequest(LoginActivity loginActivity) {
@@ -30,13 +34,13 @@ public class LoginRequest extends AsyncTask<String, Void, Boolean> {
     }
 
     @Override
-    protected Boolean doInBackground(String... args) {
+    protected Boolean doInBackground(CharSequence... args) {
         HttpClient httpClient = LoginActivity.getHttpClient();
-        HttpPost httppost = new HttpPost("https://ncore.cc/login.php");
+        HttpPost httppost = new HttpPost(loginActivity.getString(R.string.ncore_login_url));
 
         try {
             // Add your data
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
 
             /**
              * set_lang:hu
@@ -52,8 +56,8 @@ public class LoginRequest extends AsyncTask<String, Void, Boolean> {
             nameValuePairs.add(new BasicNameValuePair("submitted", "1"));
             nameValuePairs.add(new BasicNameValuePair("submit", "Belépés!"));
 
-            nameValuePairs.add(new BasicNameValuePair("nev", "goofyx"));
-            nameValuePairs.add(new BasicNameValuePair("pass", "susegoofyY50027462"));
+            nameValuePairs.add(new BasicNameValuePair("nev", args[0].toString()));
+            nameValuePairs.add(new BasicNameValuePair("pass", args[1].toString()));
 
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -68,6 +72,11 @@ public class LoginRequest extends AsyncTask<String, Void, Boolean> {
                 }
             }
             Log.wtf("Login Response", "" + response.getStatusLine().getStatusCode());
+
+            // Write login info to file
+            FileOutputStream fos = loginActivity.openFileOutput(DAT_FILENAME, Context.MODE_PRIVATE);
+            fos.write((args[0].toString() + "\n" + args[1].toString()).getBytes());
+            fos.close();
         } catch (ClientProtocolException e) {
             return false;
         } catch (IOException e) {

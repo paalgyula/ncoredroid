@@ -29,4 +29,6 @@
     <string name="torrent_downloads">Letöltések száma:</string>
     <string name="torrent_leeches">Leecherek:</string>
     <string name="torrent_uploaded">Feltöltve:</string>
+
+    <string name="ncore_login_url">https://ncore.cc/login.php</string>
 </resources>

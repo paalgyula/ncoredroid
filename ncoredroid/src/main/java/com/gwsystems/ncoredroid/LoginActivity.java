@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.gwsystems.ncoredroid.requests.LoginRequest;
 
@@ -19,6 +20,9 @@ import org.apache.http.client.RedirectHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HttpContext;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 
 public class LoginActivity extends Activity {
@@ -26,10 +30,6 @@ public class LoginActivity extends Activity {
     private static final HttpClient httpClient = new DefaultHttpClient();
     private ProgressDialog progressDialog;
 
-
-    public static HttpClient getHttpClient() {
-        return LoginActivity.httpClient;
-    }
 
     public LoginActivity() {
         ((DefaultHttpClient) httpClient).setRedirectHandler(new RedirectHandler() {
@@ -45,11 +45,27 @@ public class LoginActivity extends Activity {
         });
     }
 
+    public static HttpClient getHttpClient() {
+        return LoginActivity.httpClient;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.progressDialog = new CustomProgressDialog(this);
         setContentView(R.layout.activity_login);
+
+        final TextView usernameField = (TextView) findViewById(R.id.username);
+        final TextView passwordField = (TextView) findViewById(R.id.password);
+
+        try {
+            FileInputStream fis = openFileInput(LoginRequest.DAT_FILENAME);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+            usernameField.setText(reader.readLine());
+            passwordField.setText(reader.readLine());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         Button loginBtn = (Button) findViewById(R.id.login_btn);
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +75,7 @@ public class LoginActivity extends Activity {
                 progressDialog.setCancelable(false);
                 progressDialog.show();
 
-                new LoginRequest(LoginActivity.this).execute();
+                new LoginRequest(LoginActivity.this).execute(usernameField.getText(), passwordField.getText());
             }
         });
     }

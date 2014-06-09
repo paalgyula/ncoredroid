@@ -108,7 +108,13 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
         torrentListView.setAdapter(this.torrentListAdapter);
 
         if (savedList != null) {
-            torrentListAdapter.addAll((List<TorrentObject>) savedInstanceState.getSerializable(BUNDLED_TORRENT_LIST));
+            @SuppressWarnings("unchecked")
+            List<TorrentObject> torrents = (List<TorrentObject>) savedInstanceState.getSerializable(BUNDLED_TORRENT_LIST);
+
+            // AddAll nem hasznalhato 11 level alatt... (remek)
+            for (TorrentObject torrent : torrents) {
+                torrentListAdapter.add(torrent);
+            }
         } else {
             progressDialog = getProgressDialog();
             progressDialog.setCancelable(false);
