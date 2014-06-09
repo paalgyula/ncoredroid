@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -95,7 +96,36 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
 
         View v = inflater.inflate(R.layout.fragment_torrent_search, container, false);
         this.torrentListAdapter = new TorrentListAdapter(getActivity(), new ArrayList<TorrentObject>());
-        ListView torrentListView = (ListView) v.findViewById(R.id.torrentListView);
+        final ListView torrentListView = (ListView) v.findViewById(R.id.torrentListView);
+        torrentListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            private int visibleThreshold = 5;
+            private int currentPage = 1;
+            private int previousTotal = 0;
+            private boolean loading = true;
+
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
+                if (loading) {
+                    if (totalItemCount > previousTotal) {
+                        loading = false;
+                        previousTotal = totalItemCount;
+                        currentPage++;
+                    }
+                }
+                if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {
+                    // I load the next page of gigs using a background task,
+                    // but you can call any function here.
+                    Log.i("SearchFragment", "Load new items!");
+                    loading = true;
+                }
+            }
+        });
         torrentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -154,11 +184,6 @@ public class SearchFragment extends Fragment implements TorrentListRequest.Torre
         if (this.progressDialog == null)
             this.progressDialog = new CustomProgressDialog(this.getActivity());
         return this.progressDialog;
-    }
-
-    @Override
-    public void onViewStateRestored(Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
     }
 
     public interface SearchFragmentInteractionListener {

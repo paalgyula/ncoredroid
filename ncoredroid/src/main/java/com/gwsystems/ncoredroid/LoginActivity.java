@@ -102,4 +102,9 @@ public class LoginActivity extends Activity {
     public ProgressDialog getProgressDialog() {
         return progressDialog;
     }
+
+    @Override
+    public void onBackPressed() {
+        getFragmentManager().popBackStack();
+    }
 }
